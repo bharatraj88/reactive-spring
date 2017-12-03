@@ -4,7 +4,7 @@ import java.time.LocalTime;
 import org.springframework.data.repository.NoRepositoryBean;
 
 @NoRepositoryBean
-public class TrackingInfo {
+public abstract class TrackingInfo {
 
     private LocalTime trackFromTime;
 
