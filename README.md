@@ -5,9 +5,9 @@ A simple location tracker application that would receive data from IOT devices o
 mobile on location of a given vehicle or person.
 
 Tech Stack:
-Java - 1.8
-Spring Boot - 2.0.0
-Reactive Mongo DB
+1. Java - 1.8
+2. Spring Boot - 2.0.0
+3. Reactive Mongo DB
 
 Assumption:
 GPS Device Id or Mobile App is capable of sending current location and speed of vehicle by invoking a rest end point.
