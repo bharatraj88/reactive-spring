@@ -1,38 +1,21 @@
 package com.example.locationtracking.web.dto;
 
 import com.example.locationtracking.entity.Assets;
-import com.example.locationtracking.entity.DeviceInfo;
 import com.example.locationtracking.entity.DeviceType;
-import com.example.locationtracking.entity.DriverMobileInfo;
 import com.example.locationtracking.entity.GPSDeviceInfo;
-import java.time.LocalTime;
+import com.example.locationtracking.entity.MobileAppInfo;
+import com.example.locationtracking.entity.TrackingInfo;
 import java.util.UUID;
 
 public class AssetDTO {
 
-    private LocalTime pingFrequency;
+    private String driverName;
 
     private DeviceType deviceType;
 
     private String vehicleNumber;
 
-    private String deviceId;
-
-    private String manufacturer;
-
-    private String name;
-
-    private String phoneNumber;
-
-    private String imei;
-
-    public LocalTime getPingFrequency() {
-        return pingFrequency;
-    }
-
-    public void setPingFrequency(LocalTime pingFrequency) {
-        this.pingFrequency = pingFrequency;
-    }
+    private AssetTrackingConfigDTO trackingConfig;
 
     public DeviceType getDeviceType() {
         return deviceType;
@@ -50,61 +33,48 @@ public class AssetDTO {
         this.vehicleNumber = vehicleNumber;
     }
 
-    public String getDeviceId() {
-        return deviceId;
+    public String getDriverName() {
+        return driverName;
     }
 
-    public void setDeviceId(String deviceId) {
-        this.deviceId = deviceId;
-    }
-
-    public String getManufacturer() {
-        return manufacturer;
-    }
-
-    public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getImei() {
-        return imei;
-    }
-
-    public void setImei(String imei) {
-        this.imei = imei;
+    public void setDriverName(String driverName) {
+        this.driverName = driverName;
     }
 
     public Assets toEntity(){
         Assets assets = new Assets();
         assets.setId(UUID.randomUUID().toString().replaceAll("-",""));
-        assets.setPingFrequency(this.pingFrequency);
         assets.setVehicleNumber(this.vehicleNumber);
         assets.setDeviceType(this.deviceType);
-        DeviceInfo deviceInfo = null;
+        assets.setDriverName(this.driverName);
+        TrackingInfo trackingInfo = null;
         if(DeviceType.GPS_DEVICE.equals(this.deviceType)){
-            deviceInfo = new GPSDeviceInfo(this.deviceId, this.manufacturer);
+            if(this.trackingConfig.getDeviceId() == null || this.trackingConfig.getManufacturer() == null){
+                throw new RuntimeException(
+                        " Device Id and manufacturer is mandatory if you are trying to update device type as GPS");
+            }
+            trackingInfo = new GPSDeviceInfo(this.trackingConfig.getDeviceId(), this.trackingConfig.getManufacturer());
 
         }
         else if(DeviceType.MOBILE.equals(this.deviceType)){
-            deviceInfo = new DriverMobileInfo(this.name, this.phoneNumber, this.imei);
+            if(this.trackingConfig.getPhoneNumber() == null || this.trackingConfig.getUserName() == null){
+                throw new RuntimeException(
+                        " phone number and user name is mandatory if you are trying to update device type as mobile");
+            }
+            trackingInfo = new MobileAppInfo(this.trackingConfig.getPhoneNumber(), this.trackingConfig.getUserName());
         }
-        assets.setDeviceInfo(deviceInfo);
+        trackingInfo.setTrackFromTime(this.trackingConfig.getTrackFromTime());
+        trackingInfo.setTrackToTime(this.trackingConfig.getTrackToTime());
+        trackingInfo.setTrackingFrequency(this.trackingConfig.getTrackingFrequency());
+        assets.setTrackingInfo(trackingInfo);
         return assets;
+    }
+
+    public AssetTrackingConfigDTO getTrackingConfig() {
+        return trackingConfig;
+    }
+
+    public void setTrackingConfig(AssetTrackingConfigDTO trackingConfig) {
+        this.trackingConfig = trackingConfig;
     }
 }

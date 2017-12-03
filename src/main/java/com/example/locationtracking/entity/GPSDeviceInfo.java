@@ -1,6 +1,6 @@
 package com.example.locationtracking.entity;
 
-public class GPSDeviceInfo extends DeviceInfo {
+public class GPSDeviceInfo extends TrackingInfo {
 
     public GPSDeviceInfo(){
 

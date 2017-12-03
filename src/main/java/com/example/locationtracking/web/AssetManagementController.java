@@ -2,6 +2,7 @@ package com.example.locationtracking.web;
 
 import com.example.locationtracking.service.AssetManagementService;
 import com.example.locationtracking.web.dto.AssetDTO;
+import com.example.locationtracking.web.dto.AssetUpdateInfoDTO;
 import java.util.concurrent.CompletableFuture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestAttribute;
@@ -21,8 +22,10 @@ public class AssetManagementController {
     @RequestMapping(method = RequestMethod.PUT)
     public Mono<String> addAsset(@RequestBody AssetDTO assetDTO){
         return Mono.fromCompletionStage(CompletableFuture.supplyAsync(() -> {
-            assetManagementService.addNewAsset(assetDTO.toEntity());
-            return "SUCCESS";
+            return assetManagementService.addNewAsset(assetDTO.toEntity());
+        }).thenApplyAsync((assetId) -> {
+            System.out.println(" Send Request to Device Id -> "+assetId);
+            return "REQUESTED";
         }));
     }
 
@@ -35,9 +38,13 @@ public class AssetManagementController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Mono<String> updateDeviceInfo(){
+    public Mono<String> updateDeviceInfo(@RequestBody AssetUpdateInfoDTO assetUpdateInfoDTO){
         return Mono.fromCompletionStage(CompletableFuture.supplyAsync(() -> {
-            return "SUCCESS";
+            assetManagementService.updateAssetInfo(assetUpdateInfoDTO);
+            return assetUpdateInfoDTO.getAssetId();
+        }).thenApplyAsync((assetId) -> {
+            System.out.println(" Update Request to Device Id -> "+assetId);
+            return "REQUESTED";
         }));
     }
 }

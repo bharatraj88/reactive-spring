@@ -1,6 +1,6 @@
 package com.example.locationtracking.entity;
 
-import java.time.LocalTime;
+import javax.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,14 +11,18 @@ public class Assets {
     @Id
     private String id;
 
-    private LocalTime pingFrequency;
-
+    @NotNull
     private DeviceType deviceType;
 
     @Indexed(unique = true)
+    @NotNull
     private String vehicleNumber;
 
-    private DeviceInfo deviceInfo;
+    @NotNull
+    private String driverName;
+
+    @NotNull
+    private TrackingInfo trackingInfo;
 
     public String getId() {
         return id;
@@ -26,14 +30,6 @@ public class Assets {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public LocalTime getPingFrequency() {
-        return pingFrequency;
-    }
-
-    public void setPingFrequency(LocalTime pingFrequency) {
-        this.pingFrequency = pingFrequency;
     }
 
     public DeviceType getDeviceType() {
@@ -52,11 +48,19 @@ public class Assets {
         this.vehicleNumber = vehicleNumber;
     }
 
-    public DeviceInfo getDeviceInfo() {
-        return deviceInfo;
+    public TrackingInfo getTrackingInfo() {
+        return trackingInfo;
     }
 
-    public void setDeviceInfo(DeviceInfo deviceInfo) {
-        this.deviceInfo = deviceInfo;
+    public void setTrackingInfo(TrackingInfo trackingInfo) {
+        this.trackingInfo = trackingInfo;
+    }
+
+    public String getDriverName() {
+        return driverName;
+    }
+
+    public void setDriverName(String driverName) {
+        this.driverName = driverName;
     }
 }
