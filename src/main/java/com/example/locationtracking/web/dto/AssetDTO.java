@@ -47,26 +47,28 @@ public class AssetDTO {
         assets.setVehicleNumber(this.vehicleNumber);
         assets.setDeviceType(this.deviceType);
         assets.setDriverName(this.driverName);
-        TrackingInfo trackingInfo = null;
-        if(DeviceType.GPS_DEVICE.equals(this.deviceType)){
-            if(this.trackingConfig.getDeviceId() == null || this.trackingConfig.getManufacturer() == null){
-                throw new RuntimeException(
-                        " Device Id and manufacturer is mandatory if you are trying to update device type as GPS");
-            }
-            trackingInfo = new GPSDeviceInfo(this.trackingConfig.getDeviceId(), this.trackingConfig.getManufacturer());
+        if(this.trackingConfig != null){
+            TrackingInfo trackingInfo = null;
+            if(DeviceType.GPS_DEVICE.equals(this.deviceType)){
+                if(this.trackingConfig.getDeviceId() == null || this.trackingConfig.getManufacturer() == null){
+                    throw new RuntimeException(
+                            " Device Id and manufacturer is mandatory if you are trying to update device type as GPS");
+                }
+                trackingInfo = new GPSDeviceInfo(this.trackingConfig.getDeviceId(), this.trackingConfig.getManufacturer());
 
-        }
-        else if(DeviceType.MOBILE.equals(this.deviceType)){
-            if(this.trackingConfig.getPhoneNumber() == null || this.trackingConfig.getUserName() == null){
-                throw new RuntimeException(
-                        " phone number and user name is mandatory if you are trying to update device type as mobile");
             }
-            trackingInfo = new MobileAppInfo(this.trackingConfig.getPhoneNumber(), this.trackingConfig.getUserName());
+            else if(DeviceType.MOBILE.equals(this.deviceType)){
+                if(this.trackingConfig.getPhoneNumber() == null || this.trackingConfig.getUserName() == null){
+                    throw new RuntimeException(
+                            " phone number and user name is mandatory if you are trying to update device type as mobile");
+                }
+                trackingInfo = new MobileAppInfo(this.trackingConfig.getPhoneNumber(), this.trackingConfig.getUserName());
+            }
+            trackingInfo.setTrackFromTime(this.trackingConfig.getTrackFromTime());
+            trackingInfo.setTrackToTime(this.trackingConfig.getTrackToTime());
+            trackingInfo.setTrackingFrequency(this.trackingConfig.getTrackingFrequency());
+            assets.setTrackingInfo(trackingInfo);
         }
-        trackingInfo.setTrackFromTime(this.trackingConfig.getTrackFromTime());
-        trackingInfo.setTrackToTime(this.trackingConfig.getTrackToTime());
-        trackingInfo.setTrackingFrequency(this.trackingConfig.getTrackingFrequency());
-        assets.setTrackingInfo(trackingInfo);
         return assets;
     }
 

@@ -18,9 +18,9 @@ public class AssetManagementTest extends BaseTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void testAddAssetWithoutTrackingInfo(){
+    public void testAddAssetWithoutGPSInfo(){
         AssetDTO assetDTO = getAssetDTO();
-        assetDTO.setTrackingConfig(null);
+        assetDTO.getTrackingConfig().setDeviceId(null);
         assetManagementService.addNewAsset(assetDTO);
     }
 
@@ -30,6 +30,13 @@ public class AssetManagementTest extends BaseTest {
         assetDTO.getTrackingConfig().setDeviceId(null);
         assetDTO.getTrackingConfig().setManufacturer(null);
         assetManagementService.addNewAsset(assetDTO);
+    }
+
+    @Test
+    public void testRemoveAsset(){
+        String assetId = assetManagementService.addNewAsset(getAssetDTO());
+        assetManagementService.removeAsset(assetId);
+        Assert.assertTrue(!assetManagementService.getAssetById(assetId).isPresent());
     }
 
 }
