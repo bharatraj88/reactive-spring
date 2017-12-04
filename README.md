@@ -13,23 +13,25 @@ Setup Instructions
 ------
 Prerequisite:
 1. Java 1.8 or higher installed
-2. Mongo DB 3.6 or higher installed
-3. Maven installed
+2. Mongo DB 3.6 or higher installed (https://www.mongodb.com/)
+3. Maven installed (https://maven.apache.org/install.html)
 
 Run Application:
 ----
 mvn install && java -jar target/reactive-spring-0.0.1-SNAPSHOT.jar
 
-View Controller Documentation:
+View Rest Api Documentation:
 -----
 Swagger is integrated to the application. To view documentation, follow the below url after running the application
 http://localhost:8080/swagger-ui.html
 
 
 Assumption:
+------
 GPS Device Id or Mobile App is capable of sending current location and speed of vehicle by invoking a rest end point.
 Devices are capable of sending location between the configured/updatable from and time for the configurable frequency of pings.
 Devices are authenticated with the App
+
 
 Class Diagram
 ![](https://github.com/bharatraj88/reactive-spring/blob/master/src/class-diagram.jpg)
