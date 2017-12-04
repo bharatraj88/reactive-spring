@@ -1,7 +1,6 @@
 package com.example.locationtracking.web;
 
-import com.example.locationtracking.service.AssetManagementService;
-import com.example.locationtracking.web.dto.AssetDTO;
+import com.example.locationtracking.service.AssetDriverLinkageService;
 import com.example.locationtracking.web.dto.AssetUpdateInfoDTO;
 import java.util.concurrent.CompletableFuture;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,28 +12,27 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping(value = "/asset")
-public class AssetManagementController {
+@RequestMapping(value = "/asset/driver")
+public class AssetDriverLinkageController {
 
     @Autowired
-    private AssetManagementService assetManagementService;
+    private AssetDriverLinkageService linkDriverToAsset;
 
-    @RequestMapping(method = RequestMethod.PUT)
-    public Mono<String> addAsset(@RequestBody AssetDTO assetDTO){
+    @RequestMapping(method = RequestMethod.POST , value = "link")
+    public Mono<String> linkDriverToAsset(@RequestBody AssetUpdateInfoDTO assetUpdateInfoDTO){
         return Mono.fromCompletionStage(CompletableFuture.supplyAsync(() -> {
-            return assetManagementService.addNewAsset(assetDTO);
+            linkDriverToAsset.linkDriverToAsset(assetUpdateInfoDTO);
+            return assetUpdateInfoDTO.getAssetId();
         }).thenApplyAsync((assetId) -> {
-            System.out.println(" Send Request to Device Id -> "+assetId);
             return "REQUESTED";
         }));
     }
 
-    @RequestMapping(method = RequestMethod.DELETE , value = "/{id}")
-    public Mono<String> removeAsset(@RequestAttribute String id){
+    @RequestMapping(method = RequestMethod.POST , value = "delink/{id}")
+    public Mono<String> deLinkDriverFromAsset(@RequestAttribute String id){
         return Mono.fromCompletionStage(CompletableFuture.supplyAsync(() -> {
-            assetManagementService.removeAsset(id);
-            return "SUCCESS";
+            linkDriverToAsset.deLinkDriverFromAsset(id);
+            return "COMPLETED";
         }));
     }
-
 }
