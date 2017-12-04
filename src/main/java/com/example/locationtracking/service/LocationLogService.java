@@ -1,8 +1,8 @@
 package com.example.locationtracking.service;
 
-import com.example.locationtracking.entity.AssetLocationLog;
+import com.example.locationtracking.web.dto.LocationLogRequestDTO;
 
 public interface LocationLogService {
 
-    void logLocation(AssetLocationLog locationLog);
+    void logLocation(LocationLogRequestDTO locationLog);
 }

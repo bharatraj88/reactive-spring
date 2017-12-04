@@ -12,11 +12,11 @@ public class AssetLocationLog {
 
     private DeviceType deviceType;
 
-    private String assetId;
-
     private Long speed;
 
     private String additionalData;
+
+    private String driverName;
 
     public LocalDateTime getLogTime() {
         return logTime;
@@ -42,14 +42,6 @@ public class AssetLocationLog {
         this.deviceType = deviceType;
     }
 
-    public String getAssetId() {
-        return assetId;
-    }
-
-    public void setAssetId(String assetId) {
-        this.assetId = assetId;
-    }
-
     public Long getSpeed() {
         return speed;
     }
@@ -64,5 +56,13 @@ public class AssetLocationLog {
 
     public void setAdditionalData(String additionalData) {
         this.additionalData = additionalData;
+    }
+
+    public String getDriverName() {
+        return driverName;
+    }
+
+    public void setDriverName(String driverName) {
+        this.driverName = driverName;
     }
 }
