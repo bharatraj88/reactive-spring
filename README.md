@@ -12,7 +12,6 @@ Tech Stack:
 Setup Instructions
 ------
 Prerequisite:
-------
 1. Java 1.8 or higher installed
 2. Mongo DB 3.6 or higher installed
 3. Maven installed
