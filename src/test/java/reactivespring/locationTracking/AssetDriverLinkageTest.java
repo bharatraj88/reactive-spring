@@ -1,5 +1,6 @@
 package reactivespring.locationTracking;
 
+import com.example.locationtracking.ReactiveSpringLocationTrackingApp;
 import com.example.locationtracking.entity.Assets;
 import com.example.locationtracking.entity.DeviceType;
 import com.example.locationtracking.service.AssetDriverLinkageService;
@@ -11,9 +12,16 @@ import java.time.LocalTime;
 import java.util.Optional;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.StringUtils;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = ReactiveSpringLocationTrackingApp.class)
+@TestPropertySource(locations="classpath:test.properties")
 public class AssetDriverLinkageTest extends BaseTest {
 
     @Autowired
