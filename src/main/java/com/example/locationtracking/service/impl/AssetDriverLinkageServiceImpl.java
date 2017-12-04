@@ -16,6 +16,11 @@ public class AssetDriverLinkageServiceImpl implements AssetDriverLinkageService 
     @Autowired
     private AssetsRepository assetsRepository;
 
+    /**
+     * Links Driver to an Asset or vehicle
+     *
+     * @throws RuntimeException if Asset already present, invalid asset id or Driver already linked to asset
+     */
     @Override
     public void linkDriverToAsset(AssetUpdateInfoDTO assetUpdateInfoDTO) {
         if(assetUpdateInfoDTO == null || assetUpdateInfoDTO.getAssetId() == null){
@@ -33,6 +38,12 @@ public class AssetDriverLinkageServiceImpl implements AssetDriverLinkageService 
         assetsRepository.save(asset);
     }
 
+    /**
+     * De-Links a Driver from an Asset , so that another driver can be linked subsequently to the Asset
+     *
+     * @throws RuntimeException  If Asset Id is invalid
+     * @param id
+     */
     @Override
     public void deLinkDriverFromAsset(String id) {
         Optional<Assets> assetsOptional = this.assetsRepository.findById(id);
