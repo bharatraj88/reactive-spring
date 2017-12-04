@@ -9,16 +9,20 @@ Tech Stack:
 2. Spring Boot - 2.0.0
 3. Mongo DB - 3.6
 
-Setup Instructions:
+Setup Instructions
+------
 Prerequisite:
-1.) Java 1.8 or higher installed
-2.) Mongo DB 3.6 or higher installed
-3.) Maven installed
+------
+1. Java 1.8 or higher installed
+2. Mongo DB 3.6 or higher installed
+3. Maven installed
 
 Run Application:
+----
 mvn install && java -jar target/reactive-spring-0.0.1-SNAPSHOT.jar
 
 View Controller Documentation:
+-----
 Swagger is integrated to the application. To view documentation, follow the below url after running the application
 http://localhost:8080/swagger-ui.html
 
