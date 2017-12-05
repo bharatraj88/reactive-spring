@@ -33,6 +33,7 @@ Devices are capable of sending location between the configured/updatable from an
 Devices are authenticated with the App
 
 
-Class Diagram
+Class Diagram:
+------
 ![](https://github.com/bharatraj88/reactive-spring/blob/master/src/class-diagram.jpg)
 
