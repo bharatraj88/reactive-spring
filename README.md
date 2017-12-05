@@ -107,5 +107,5 @@ Assumption: IOT Device / Mobile App / GPS device is capable of sending rest requ
        >   "speed": "number"  <br>
        > }  <br>
     
-    Logs the location and speed information. Rest request made from the device to the application.
+     Logs the location and speed information. Rest request made from the device to the application.
       
