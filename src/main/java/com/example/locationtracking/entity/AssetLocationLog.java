@@ -17,6 +17,8 @@ public class AssetLocationLog {
     private String additionalData;
 
     private String driverName;
+    
+    private String vehicleNumber;
 
     public LocalDateTime getLogTime() {
         return logTime;
@@ -64,5 +66,13 @@ public class AssetLocationLog {
 
     public void setDriverName(String driverName) {
         this.driverName = driverName;
+    }
+    
+    public String getVehicleNumber(){
+        return this.vehicleNumber;
+    }
+    
+    public void setVehicleNumber(String vehicleNumber){
+        this.vehicleNumber = vehicleNumber;
     }
 }
