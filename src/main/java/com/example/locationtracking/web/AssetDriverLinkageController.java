@@ -1,6 +1,6 @@
 package com.example.locationtracking.web;
 
-import com.example.locationtracking.service.AssetDriverLinkageService;
+import com.example.locationtracking.nonreactive.service.AssetDriverLinkageService;
 import com.example.locationtracking.web.dto.AssetUpdateInfoDTO;
 import java.util.concurrent.CompletableFuture;
 import org.springframework.beans.factory.annotation.Autowired;

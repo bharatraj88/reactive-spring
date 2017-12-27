@@ -1,17 +1,12 @@
 package reactivespring.locationTracking;
 
-import com.example.locationtracking.ReactiveSpringLocationTrackingApp;
 import com.example.locationtracking.entity.DeviceType;
 import com.example.locationtracking.web.dto.AssetDTO;
 import com.example.locationtracking.web.dto.AssetTrackingConfigDTO;
 import java.time.LocalTime;
 import org.junit.Before;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
 
 public class BaseTest {
 

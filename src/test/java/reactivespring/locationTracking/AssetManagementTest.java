@@ -1,9 +1,9 @@
 package reactivespring.locationTracking;
 
-import com.example.locationtracking.ReactiveSpringLocationTrackingApp;
+import com.example.locationtracking.NonReactiveSpringLocationTrackingApp;
 import com.example.locationtracking.entity.Assets;
 import com.example.locationtracking.entity.DeviceType;
-import com.example.locationtracking.service.AssetManagementService;
+import com.example.locationtracking.nonreactive.service.AssetManagementService;
 import com.example.locationtracking.web.dto.AssetDTO;
 import java.util.List;
 import org.junit.Assert;
@@ -15,7 +15,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = ReactiveSpringLocationTrackingApp.class)
+@SpringBootTest(classes = NonReactiveSpringLocationTrackingApp.class)
 @TestPropertySource(locations="classpath:test.properties")
 public class AssetManagementTest extends BaseTest {
 
